@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #add8e6;
+            text-align: center;
+            margin-top: 50px;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        .result {
+            background: white;
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 250px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0077b6;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #005f8d;
+        }
+    </style>
+</head>
+<body>
+<h1>Weather App</h1>
+
+<form th:action="@{/weather}" method="post">
+    <input type="text" name="city" placeholder="Enter city name" required />
+    <input type="submit" value="Get Weather" />
+</form>
+
+<div class="result" th:if="${city}">
+    <h2 th:text="'Weather in ' + ${city}"></h2>
+    <p><strong>Temperature:</strong> <span th:text="${temperature}"></span> °C</p>
+</div>
+
+<div class="result" th:if="${error}">
+    <p style="color:red;" th:text="${error}"></p>
+</div>
+</body>
+</html>
